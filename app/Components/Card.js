@@ -6,36 +6,47 @@ import {Avatar} from 'react-native-elements'
 
 import styles from '../Screens/Style/ListStyle'
 
-const Card= ({ text, onPress, style, source, text2, text3, baseCurrency, equivalent=0}) => (
+const Card= ({ title, text, onPress, style, source, text2, text3, baseCurrency, equivalent=0, containerStyle}) => (
 
     <TouchableOpacity style={styles.row} 
                       onPress={onPress}>
-    <View style={{justifyContent: 'center', paddingLeft: 10}}>
+    <View style={{width: 10, backgroundColor: 'skyblue', borderRadius: 3}}/>
+    {/* <View style={{justifyContent: 'center', paddingLeft: 10}}>
         <Avatar
             medium
             rounded
-            title="BP"
+            title={title}
+            containerStyle={containerStyle}
             // onPress={() => console.log("Works!")}
             activeOpacity={0.7}
             style={styles.image}
             />
           <Image  style={styles.image}
                   source={source}/>
-        </View>
-        <View style={{flex: 1, marginLeft: 10}}>
-          <Text style={styles.boldLabel}>Compnay: {text}</Text>
-          <Text style={styles.label}>Rates: {`${text2} ${baseCurrency}`}</Text>
-          <Text style={styles.label}>{`Equivalent: ${equivalent} Rwf`}</Text>
+        </View> */}
+        <View style={{flex: 1, marginLeft: 20, flexDirection: 'row'}}>
+            <View style={{flex: 1, justifyContent: 'center'}}>
+                <Text style={styles.boldLabel}>{text}</Text>
+                <Text style={styles.label}>Buy: {`${text2} ${baseCurrency}`}</Text>
+                <Text style={styles.label}>Sell: {`${text2} ${baseCurrency}`}</Text>
+                {/* <Text style={styles.label}>{`Equivalent: ${equivalent} Rwf`}</Text> */}
+            </View>
+            <View style={{flex: 1, flexDirection: 'column',justifyContent: 'space-between', alignItems: 'center'}}>
+                <Text style={{fontSize: 20, color: '#99A3A4', fontWeight:'bold', position: 'absolute',right: 25,}}>Buy</Text>
+                <Text style={{fontSize: 18, color: '#52BE80', fontWeight:'bold', position: 'absolute',right: 25, marginTop: 45}}>{`${equivalent} Rwf`}</Text>
+            </View>
         </View>
     </TouchableOpacity>
 );
 
 Card.propTypes = {
+    title: PropTypes.string,
     text3: PropTypes.string,
     text2: PropTypes.number,
     equivalent: PropTypes.number,
     text: PropTypes.string,
     onPress: PropTypes.func,
     source: PropTypes.number,
+    containerStyle: PropTypes.any,
     };
 export default Card;

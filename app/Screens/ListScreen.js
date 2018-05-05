@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 // apollo things
 import {withApollo, graphql, compose} from 'react-apollo'
 import gql from 'graphql-tag'
-import { StyleSheet, Text, View, Button, TouchableOpacity, FlatList, Image, Animated } from 'react-native';
+import { StyleSheet, Text, View, Button, TouchableHighlight, FlatList, Image, Animated } from 'react-native';
 import {Header} from 'react-native-elements'
 import { FontAwesome } from '@expo/vector-icons'
 
@@ -13,46 +13,30 @@ import Card from '../Components/Card'
 import InputButton from '../Components/InputButton'
 import styles from './Style/ListStyle'
 
-
+const colors= [
+  '#7FB3D5','#A569BD','#F7DC6F','#E74C3C','#EB9CA8', '#7C878E',
+  '#8A004F','#000000','#10069F','#00a3e0','#4CC1A1'
+]
 const initailState = {
   data: [],
   loading: true,
   inputedValue: 0,
-  baseCurrency: 'EUR'
+  baseCurrency: 'EUR',
+  backgroundColor: '#3498DB'
 }
 
 class ListScreen extends Component {
 
-  // componentWillReceiveProps(nextProps) {
-  //   console.log(nextProps)
-  // }
   constructor(props) {
     super(props);
     this.state = initailState
   };
 
-
-
-  // static navigationOptions = ({navigation})=>{
-  //   return{
-  //       headerTitle: 'Forex App',
-  //       headerLeft: (
-  //         <HeaderIcon 
-  //           onPress={()=> this.props.navigation.navigate('DrawerOpen')} 
-  //           name="menu"
-  //           color="black" />
-  //       ),
-  //       headerStyle: {
-  //           paddingLeft: 10,
-  //           paddingRight: 10
-  //           // padding: 20
-  //       },
-  //       headerTitleStyle: {
-  //           marginLeft: 50
-  //       }
-  //   }
-  // };
-
+  changeColor=()=>{
+    this.setState({backgroundColor: '#F1948A'})
+    // console.log(this.state.backgroundColor)
+    // alert('boom clicking')
+  }
  
   _handleCurrencyInput = (value) => {
     const currencyEntered = parseInt(value)
@@ -66,21 +50,6 @@ class ListScreen extends Component {
       inputedValue: 0
     })
   }
-  // fetchData() {
-  //   fetch('https://restcountries.eu/rest/v2/all')
-  //     .then(response => response.json())
-  //     .then(response => {
-  //       this.setState({ 
-  //         data: response,
-  //         loaded: true,   
-  //         refreshing: false,
-  //         countries: response
-  //       });
-  //     })
-  //     .done();
-      
-  // }
-
 
 // back code written by Luc Dev
   async componentDidMount() {
@@ -141,42 +110,52 @@ class ListScreen extends Component {
       )
     }
     return (
-      <View style={{flex: 1}}>
       <View style={styles.container}>
       <View style={styles.headerContainer}>
-            <Text style={styles.textHead}>type the amount that you want to convert</Text>
-            {/* <Animated.View style={[styles.cardContainer, {opacity: this.state.fadeValue}]}>
-            </Animated.View> */}
-            <InputButton  
-                ListScreenRealTimeFeedBack
-                // onPress={() => console.log(inputedValue)}
-                onPress={() => this.props.navigation.navigate('CurrencyList', {setBaseCurrency: this.setBaseCurrency})}
-                buttonText={this.state.baseCurrency}
-                editable= {true}
-                keyboardType="numeric"
-                onChangeText={(value) => this._handleCurrencyInput(value)}
-            />
-          </View>
-        <FlatList
-          contentContainerStyle={styles.listContent}
-          data={this.state.data}
-          extraData={this.state}
-          renderItem={({ item }) => (
-            <Card 
-              // source={item.image} 
-              onPress={() => this.props.navigation.navigate('Details', {data: this.state.data, currentItem: [item] })}
-              text={item.user.companyName} 
-              text2={parseInt(item.rates)}
-              baseCurrency={item.base}
-              equivalent={parseInt(item.rates) * parseInt(inputedValue)}/>
-          )}
-          numColumns={1}
-          keyExtractor={this.keyExtractor}
-          initialNumToRender={this.oneScreensWorth}
-          ListEmptyComponent={this.renderEmpty}
-          // ItemSeparatorComponent={this.renderSeparator}
+        <View style={styles.buttonContainer}>
+          <TouchableHighlight 
+              onPress={this.changeColor} 
+              style={{flex: 1, backgroundColor: this.state.backgroundColor, alignSelf: 'center', alignContent: 'center'}}>
+            <Text style={styles.textHead}>Buy</Text>
+          </TouchableHighlight>
+          <View style={{width: 2, backgroundColor: 'skyblue'}}/>
+          <TouchableHighlight
+              onPress={this.changeColor} 
+              style={{flex: 1, backgroundColor: this.state.backgroundColor, alignSelf: 'center', alignContent: 'center'}}>
+            <Text style={styles.textHead}>Sell</Text>
+          </TouchableHighlight>
+        </View>  
+          <InputButton  
+              ListScreenRealTimeFeedBack
+              // onPress={() => console.log(inputedValue)}
+              onPress={() => this.props.navigation.navigate('CurrencyList', {setBaseCurrency: this.setBaseCurrency})}
+              buttonText={this.state.baseCurrency}
+              editable= {true}
+              keyboardType="numeric"
+              onChangeText={(value) => this._handleCurrencyInput(value)}
           />
-      </View>
+          </View>
+          <FlatList
+            contentContainerStyle={styles.listContent}
+            data={this.state.data}
+            extraData={this.state}
+            keyExtractor={this.keyExtractor}
+            renderItem={({ item, index }) => (
+              <Card 
+                title={item.user.companyName.substring(0, 2)}
+                containerStyle={{backgroundColor: colors[index%colors.length]}}
+                // source={item.image} 
+                onPress={() => this.props.navigation.navigate('Details', {data: this.state.data, currentItem: [item] })}
+                text={item.user.companyName} 
+                text2={parseInt(item.rates)}
+                baseCurrency={item.base}
+                equivalent={parseInt(item.rates) * parseInt(inputedValue)}/>
+            )}
+            numColumns={1}
+            initialNumToRender={this.oneScreensWorth}
+            ListEmptyComponent={this.renderEmpty}
+            // ItemSeparatorComponent={this.renderSeparator}
+          />
       </View>
     );
   }

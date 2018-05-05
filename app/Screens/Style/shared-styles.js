@@ -1,25 +1,31 @@
-import { StatusBar, StyleSheet } from 'react-native';
+import { StatusBar, StyleSheet, Dimensions } from 'react-native';
+
+const screenwidth = Dimensions.get('window').width
+const screenheight = Dimensions.get('window').height
+
+// export const sharedSytles = {
+//   backgroundColor: 'rgba(0, 190, 0,1)',
+// }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // paddingBottom: 50,
-    // paddingVertical: StatusBar.currentHeight + 10,
-    // alignContent: 'center',
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    backgroundColor: '#2c3e50',
+    alignContent: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+    // backgroundColor: sharedSytles.backgroundColor,
   },
   inputContainer: {
-    height: 48,
+    height: screenheight /7,
+    paddingTop: StatusBar.currentHeight,
     flexDirection: 'row',
-    width: '100%',
-    // paddingHorizontal: 8,
+    width: '99%',
+    paddingHorizontal: 8,
     backgroundColor: 'white',
   },
   input: {
     height: 47,
-    width: '100%',
+    width: '99%',
     paddingHorizontal: 8,
     backgroundColor: 'white',
     fontSize: 18,
@@ -31,23 +37,21 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     height: 48,
-    // paddingRight: 10,
+    paddingRight: 10,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'white',
-  },
-  footer: {
-    paddingVertical: 20,
-    borderTopWidth: 1,
-    borderColor: "#CED0CE"
   },
   separator: {
     height: '100%',
     width: StyleSheet.hairlineWidth,
     backgroundColor: "black",
   },
-  list: { width: '100%', marginTop: 2, backgroundColor: 'white' }
+  list: {
+    width: '99%',
+    paddingTop: 10,
+    backgroundColor: 'white'
+  }
 });
 
-
-export default styles;
+export default styles

@@ -8,7 +8,6 @@ export default StyleSheet.create({
   ...ApplicationStyles.screen,
   container: {
     flex: 1,
-    marginTop: 25,
     backgroundColor: Colors.snow
   },
   row: {
@@ -29,18 +28,16 @@ export default StyleSheet.create({
     flexDirection: 'row'
   },
   boldLabel: {
-    flex:1 ,
+    paddingVertical: 2,
     fontWeight: 'bold',
     fontSize: 16,
-    // alignSelf: 'center',
     color: Colors.charcoal,
-    // textAlign: 'center',
-    // marginBottom: Metrics.smallMargin
   },
   label: {
-    flex:1 ,
-    // textAlign: 'center',
-    color: 'grey'
+    paddingVertical: 5,
+    fontWeight: '500',
+    color: 'gray',
+    fontSize: 13
   },
   listContent: {
     marginTop: Metrics.baseMargin
@@ -61,5 +58,16 @@ export default StyleSheet.create({
     height: screenheight-5,
     width: screenwidth-5,
     backgroundColor: '#3498DB'
-  }
+  },
+  buttonContainer:{
+    marginVertical: 20, 
+    marginLeft: 20, 
+    flexDirection: 'row',
+    borderWidth: 2,
+    borderColor: '#3498DB',
+    borderRadius: 20,
+    height: 40,
+    width: 200,
+    paddingHorizontal: 50,
+    alignSelf: 'center'}
 })

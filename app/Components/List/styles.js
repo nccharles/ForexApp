@@ -1,17 +1,23 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+
+const screenwidth = Dimensions.get('window').width
+const screenheight = Dimensions.get('window').height
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#2c3e50',
+    backgroundColor: 'gray',
   },
   parent: {
     width: '100%',
-    height: 50,
+    height: screenheight /12,
     flexDirection: 'row',
     backgroundColor: 'white',
+    paddingHorizontal: 5,
+    // paddingVertical: 1.5
+    // justifyContent: 'center'
   },
   leftRound: {
     width: 45,
@@ -31,10 +37,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   leftRectangular: {
-    height: 50,
-    width: '14%',
-    marginLeft: 5,
-    justifyContent: 'center',
+    flex: 1, 
+    // alignSelf: 'stretch',
+    height: null, 
+    width: null
   },
   center: {
     height: '100%',
@@ -74,11 +80,20 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: 'rgba(0,150,0,1)'
   },
+  imageContainer: {
+    borderWidth: 0.5,
+    width: screenwidth/ 6,
+    height: screenheight /17,
+    // height: 38,
+    marginLeft: 5,
+    marginVertical: 5,
+    justifyContent: 'center'
+  },
   separator: {
     height: 1,
-    width: "100%",
+    width: screenwidth,
     backgroundColor: "#CED0CE",
-    marginLeft: "14%"
+    // marginLeft: "14%"
   },
 
 });
