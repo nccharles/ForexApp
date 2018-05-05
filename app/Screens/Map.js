@@ -5,8 +5,12 @@ import MapViewDirections from 'react-native-maps-directions'
 import {
   Platform, Text, View, StyleSheet, Dimensions
 } from 'react-native';
-import styles from '../shared-styles';
-import { RunInfo, RunInfoNumeric } from '../components/footer';
+
+
+import styles from './Style/MapStyle';
+// import { RunInfo, RunInfoNumeric } from '../components/footer';
+
+
 let { width, height } = Dimensions.get('window')
 const ASPECT_RATIO = width / height
 const LATITUDE_DELTA = 0.07003

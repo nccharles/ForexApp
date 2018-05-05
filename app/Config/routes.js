@@ -8,7 +8,7 @@ import TabNavScreen from './tabNav'
 import CurrencyList from '../Screens/CurrencyList'
 import Details from '../Screens/Details'
 import MapView from '../Screens/Map'
-import International from '../Screens/Home'
+import International from '../Screens/International'
 
 // Manifest of possible screens
 const PrimaryNav = StackNavigator({

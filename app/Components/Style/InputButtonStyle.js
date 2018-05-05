@@ -16,8 +16,8 @@ export default StyleSheet.create({
         borderRadius: BORDER_RADIUS,
         flexDirection: 'row',
         alignItems: 'center',
-        marginVertical: 10,
-        margin: 10,
+        // marginVertical: 10,
+        // margin: 10,
         // marginHorizontal: 20
     },
     buttonContainer:{
@@ -35,7 +35,7 @@ export default StyleSheet.create({
         fontWeight: '600',
         fontSize: 20,
         paddingHorizontal: 16,
-        color: '#3498DB'
+        color: '#5499C7'
     },
     input:{
         height: INPUT_HEIGHT,

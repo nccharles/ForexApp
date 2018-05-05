@@ -5,26 +5,19 @@ import moment from 'moment';
 
 import styles from './styles';
 
-const LastConverted = ({ date, base, quote, conversionRate }) => (
+const LastConverted = ({ lastUpdated }) => (
   <View
-    style={{
-      height: 20, backgroundColor: 'cyan', flex: 1,
-      alignContent: 'center', justifyContent: 'center', marginTop: 20,
-      borderRadius: 10
-    }}
+    style={styles.wrapper}
   >
     <Text
-      style={styles.smallText}>
-      1 {base} = {conversionRate} {quote} as of {moment(date).format('MMMM D, YYYY')}
+      style={styles.text}>
+      Ex-rates updated => {moment(lastUpdated).format('ddd DD, MMMM, YYYY')}
     </Text>
   </View>
 );
 
 LastConverted.propTypes = {
-  date: PropTypes.object,
-  base: PropTypes.string,
-  quote: PropTypes.string,
-  conversionRate: PropTypes.number,
-};
 
-export default LastConverted;
+  lastUpdated: PropTypes.string,
+};
+export default LastConverted

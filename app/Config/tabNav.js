@@ -4,7 +4,7 @@ import { TabNavigator, TabBarBottom } from 'react-navigation'
 import { FontAwesome } from '@expo/vector-icons'
 
 import MapView from '../Screens/Map'
-import CurrencyList from '../Screens/Home'
+import CurrencyList from '../Screens/International'
 import ListScreen from '../Screens/ListScreen'
 
 import location from '../Assets/TabImage/location-map.png'
@@ -30,14 +30,13 @@ const TabNavigationScreen = TabNavigator({
         else if (routeName === 'CurrencyList'){
             iconName = globe
         }
-    
-        // You can return any component that you like here! We usually use an
-        // icon component from react-native-vector-icons
+
         return <Image 
                     source={iconName} 
                     tintColor={tintColor} 
                     resizeMode='center' 
-                    style={{width: 40, height: 40, flex: 1}}/>
+                    style={{width: 60, height: 60, flex: 1}}
+                />
       }
     }),
     tabBarOptions: {
