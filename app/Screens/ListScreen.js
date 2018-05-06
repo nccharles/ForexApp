@@ -1,28 +1,29 @@
 import React,{Component} from 'react';
 import PropTypes from 'prop-types'
-
-// apollo things
-import {withApollo, graphql, compose} from 'react-apollo'
-import gql from 'graphql-tag'
 import { StyleSheet, Text, View, Button, TouchableHighlight, FlatList, Image, Animated } from 'react-native';
 import {Header} from 'react-native-elements'
 import { FontAwesome } from '@expo/vector-icons'
 
+// apollo things
+import {withApollo, graphql, compose} from 'react-apollo'
+import gql from 'graphql-tag'
+
 // import HeaderIcon from '../Components/HeaderIcon'
+import CategoryBtn from '../Components/ButtonCategory/BtnCategory'
 import Card from '../Components/Card'
 import InputButton from '../Components/InputButton'
 import styles from './Style/ListStyle'
 
-const colors= [
-  '#7FB3D5','#A569BD','#F7DC6F','#E74C3C','#EB9CA8', '#7C878E',
-  '#8A004F','#000000','#10069F','#00a3e0','#4CC1A1'
-]
 const initailState = {
   data: [],
   loading: true,
   inputedValue: 0,
   baseCurrency: 'EUR',
-  backgroundColor: '#3498DB'
+  buyBackgroundColor: 'transparent',
+  buyTextColor: '#3498DB',
+  sellBackgroundColor: 'transparent',
+  sellTextColor: '#3498DB',
+  category: 'Buy or Sell'
 }
 
 class ListScreen extends Component {
@@ -32,10 +33,24 @@ class ListScreen extends Component {
     this.state = initailState
   };
 
-  changeColor=()=>{
-    this.setState({backgroundColor: '#F1948A'})
-    // console.log(this.state.backgroundColor)
-    // alert('boom clicking')
+  changeBuyColor=()=>{
+    this.setState({
+      buyBackgroundColor: '#3498DB',
+      sellBackgroundColor: 'transparent',
+      category: 'Buy',
+      buyTextColor: 'white',
+      sellTextColor: '#3498DB',
+    })
+  }
+
+  changeSellColor=()=>{
+    this.setState({
+      sellBackgroundColor: '#3498DB',
+      buyBackgroundColor: 'transparent',
+      category: 'Sell',
+      sellTextColor: 'white',
+      buyTextColor: '#3498DB',
+    })
   }
  
   _handleCurrencyInput = (value) => {
@@ -105,29 +120,49 @@ class ListScreen extends Component {
     if(this.state.loading){
       return(
         <View>
-          <Text>Loading</Text>
+          <Text>Loading...</Text>
         </View>
       )
     }
     return (
       <View style={styles.container}>
-      <View style={styles.headerContainer}>
-        <View style={styles.buttonContainer}>
-          <TouchableHighlight 
-              onPress={this.changeColor} 
-              style={{flex: 1, backgroundColor: this.state.backgroundColor, alignSelf: 'center', alignContent: 'center'}}>
-            <Text style={styles.textHead}>Buy</Text>
-          </TouchableHighlight>
-          <View style={{width: 2, backgroundColor: 'skyblue'}}/>
-          <TouchableHighlight
-              onPress={this.changeColor} 
-              style={{flex: 1, backgroundColor: this.state.backgroundColor, alignSelf: 'center', alignContent: 'center'}}>
-            <Text style={styles.textHead}>Sell</Text>
-          </TouchableHighlight>
-        </View>  
-          <InputButton  
-              ListScreenRealTimeFeedBack
-              // onPress={() => console.log(inputedValue)}
+      <View>
+        {/* <View style={styles.buttonContainer}> */}
+
+          <CategoryBtn 
+                onPressBuy={this.changeBuyColor}
+                onPressSell={this.changeSellColor}
+                btnBuyStyle={{
+                  flex: 1, 
+                  backgroundColor: this.state.buyBackgroundColor, 
+                  alignSelf: 'center', 
+                  height: '100%',
+                  width: '100%', 
+                  justifyContent: 'center', 
+                  borderRadius: 20,}}
+                buyTextStyle={{
+                  color: this.state.buyTextColor,
+                  fontSize: 20,
+                  fontWeight: 'bold',
+                  textAlign: 'center'}}
+                  btnSellStyle={{
+                    flex: 1, 
+                    backgroundColor: this.state.sellBackgroundColor, 
+                    alignSelf: 'center', 
+                    height: '100%',
+                    width: '100%', 
+                    justifyContent: 'center', 
+                    borderRadius: 20,}}
+                  sellTextStyle={{
+                    color: this.state.sellTextColor,
+                    fontSize: 20,
+                    fontWeight: 'bold',
+                    textAlign: 'center'}}/>
+        {/* </View>   */}
+          <InputButton
+              BtnStyle={styles.InputButton}
+              BtnTextStyle={styles.buttonText}
+              text='Enter Amount ...'
               onPress={() => this.props.navigation.navigate('CurrencyList', {setBaseCurrency: this.setBaseCurrency})}
               buttonText={this.state.baseCurrency}
               editable= {true}
@@ -143,13 +178,14 @@ class ListScreen extends Component {
             renderItem={({ item, index }) => (
               <Card 
                 title={item.user.companyName.substring(0, 2)}
-                containerStyle={{backgroundColor: colors[index%colors.length]}}
+                // containerStyle={{backgroundColor: colors[index%colors.length]}}
                 // source={item.image} 
                 onPress={() => this.props.navigation.navigate('Details', {data: this.state.data, currentItem: [item] })}
                 text={item.user.companyName} 
                 text2={parseInt(item.rates)}
                 baseCurrency={item.base}
-                equivalent={parseInt(item.rates) * parseInt(inputedValue)}/>
+                equivalent={parseInt(item.rates) * parseInt(inputedValue)}
+                category={this.state.category}/>
             )}
             numColumns={1}
             initialNumToRender={this.oneScreensWorth}

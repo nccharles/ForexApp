@@ -20,7 +20,7 @@ const PrimaryNav = StackNavigator({
     Details: { screen: Details}
 }, {
     // headerMode: 'screen',
-    initialRouteName: 'ListScreen',
+    initialRouteName: 'TabNavScreen',
     mode: 'modal',
     navigationOptions: {
         headerTitle: 'Forex App',
