@@ -1,26 +1,31 @@
 import React from 'react'
 import {View, Text, TouchableOpacity, TextInput} from 'react-native'
 import PropTypes from 'prop-types'
-// import color from 'color'
 
 import styles from './Style/InputButtonStyle'
 
 const InputWithButton = (props) => {
-    const {onPress, buttonText, editable = true, text, onChangeText, value, name} = props
-    // const underlayColor = '$lightGray'
-    // const ContainerStyles = [styles.container]
-    // if (editable === false){
-    //     ContainerStyles.push(styles.ContainerStylesDisabled)
-    // }
-    // const buttonTextStyles = [styles.buttonText];
-    // if (props.textColor) {
-    //     buttonTextStyles.push({ color: props.textColor });
-    // }
+    const {
+        onPress, 
+        buttonText, 
+        editable = true, 
+        text, 
+        onChangeText, 
+        value, 
+        name, 
+        BtnTextStyle, 
+        BtnStyle} = props
+
     return (
         <View style={styles.container}>
-            <TouchableOpacity style={styles.buttonContainer}
-                                onPress={onPress}>
-                <Text style={styles.buttonText}>
+            <TouchableOpacity 
+                    // style={styles.buttonContainer}
+                    style={BtnStyle}
+                    onPress={onPress}>
+                <Text 
+                    // style={styles.buttonText}
+                    style={BtnTextStyle}
+                >
                     {buttonText}
                 </Text>
             </TouchableOpacity>
@@ -42,6 +47,8 @@ const InputWithButton = (props) => {
 
 InputWithButton.propTypes = {
     onPress: PropTypes.func,
+    BtnStyle: PropTypes.any,
+    BtnTextStyle: PropTypes.any,
     ButtonText: PropTypes.string,
     editable: PropTypes.bool,
     text: PropTypes.string,

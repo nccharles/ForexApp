@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Image} from 'react-native'
 import { Location, Permissions } from 'expo';
 import MapView from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions'
@@ -6,7 +7,7 @@ import {
   Platform, Text, View, StyleSheet, Dimensions
 } from 'react-native';
 
-
+import UserLocation from '../Assets/MapImage/user.png'
 import styles from './Style/MapStyle';
 // import { RunInfo, RunInfoNumeric } from '../components/footer';
 
@@ -93,7 +94,9 @@ class MapScreen extends Component {
    
     return (
       <View>
-        <MapView.Marker coordinate={coordinates[0]} title={"Your location"} />
+        <MapView.Marker coordinate={coordinates[0]} title={"Your location"} image={UserLocation}/>
+          {/* <Image source={UserLocation} style={{width: 200, height: 200}}/>
+        </MapView.Marker> */}
         <MapView.Marker coordinate={coordinates[1]} onPress={() => {this.setState({selectedMarker:coordinates[1]})}} title={"Bravia Forex Bureau"} />
         <MapView.Marker coordinate={coordinates[2]} onPress={() => {this.setState({selectedMarker:coordinates[2]})}} title={"Diamonds Forex Bureau"} />
         <MapView.Marker coordinate={coordinates[3]} onPress={() => {this.setState({selectedMarker:coordinates[3]})}} title={"RG Forex Bureau"} />
@@ -134,7 +137,7 @@ class MapScreen extends Component {
             {this.renderUserLocation()}
           </MapView>
         }
-        <View style={styles.infoWrapper}>
+        {/* <View style={styles.infoWrapper}>
           <RunInfoNumeric title='Distance' unit='Km'
             ref={(info) => this.state.distanceInfo = info}
           />
@@ -144,7 +147,7 @@ class MapScreen extends Component {
           <RunInfo title='Direction' value='NE'
             ref={(info) => this.directionInfo = info}
           />
-        </View>
+        </View> */}
       </View>
     );
   }
