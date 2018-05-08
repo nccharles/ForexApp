@@ -42,7 +42,7 @@ class MapScreen extends Component {
       return alert('Enable to Access your location');
     }
   }
-  async componentWillMount() {
+  async componentDidMount() {
     const response = await this.props.client.query(
       {
         query: fetchAllLocations,
